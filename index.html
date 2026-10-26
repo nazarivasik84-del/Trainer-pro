@@ -2,244 +2,289 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Тренер Pro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Trainer Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0f0f0f;
-  --surface: #1a1a1a;
-  --surface2: #222222;
-  --border: #2e2e2e;
-  --accent: #c8f135;
-  --accent2: #7ef7c4;
-  --red: #ff5f5f;
-  --orange: #ffab5e;
-  --text: #f0f0f0;
-  --muted: #7a7a7a;
-  --muted2: #4a4a4a;
-  --radius: 14px;
-  --radius-sm: 8px;
+:root{
+  --bg:#111214;
+  --s1:#18191d;
+  --s2:#1f2024;
+  --s3:#26272c;
+  --border:#2c2d33;
+  --border2:#38393f;
+  --lime:#b8f04a;
+  --lime-dim:rgba(184,240,74,0.12);
+  --lime-border:rgba(184,240,74,0.25);
+  --teal:#4af0b8;
+  --teal-dim:rgba(74,240,184,0.1);
+  --red:#f05a4a;
+  --red-dim:rgba(240,90,74,0.1);
+  --orange:#f0a84a;
+  --blue:#4a8ff0;
+  --blue-dim:rgba(74,143,240,0.1);
+  --text:#f0f0f0;
+  --text2:#9a9ba3;
+  --text3:#5a5b63;
+  --r:12px;
+  --rsm:8px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow: hidden; }
-#app { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow:hidden}
+#app{height:100dvh;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.view{display:none;flex-direction:column;height:100%;overflow:hidden;animation:fadeIn .15s ease}
+.view.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px 24px}
+.scroll::-webkit-scrollbar{display:none}
 
-/* VIEWS */
-.view { display: none; flex-direction: column; height: 100%; overflow: hidden; }
-.view.active { display: flex; }
-
-/* SCROLLABLE CONTENT */
-.scroll-area { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
-.scroll-area::-webkit-scrollbar { display: none; }
-
-/* HEADER */
-.topbar { padding: 16px 16px 12px; display: flex; align-items: center; gap: 12px; background: var(--bg); border-bottom: 1px solid var(--border); flex-shrink: 0; }
-.topbar-title { flex: 1; }
-.topbar-title h1 { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; color: var(--text); line-height: 1; }
-.topbar-title p { font-size: 12px; color: var(--muted); margin-top: 1px; }
-.back-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); font-size: 18px; flex-shrink: 0; transition: background 0.15s; }
-.back-btn:active { background: var(--surface2); }
+/* TOPBAR */
+.topbar{padding:env(safe-area-inset-top,0) 14px 0;background:var(--bg);flex-shrink:0;border-bottom:1px solid var(--border)}
+.topbar-inner{display:flex;align-items:center;gap:10px;padding:12px 0}
+.back{width:34px;height:34px;border-radius:50%;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:16px;flex-shrink:0}
+.back:active{background:var(--s3)}
+.topbar-title{flex:1;min-width:0}
+.topbar-title h2{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-title p{font-size:11px;color:var(--text2);margin-top:1px}
+.topbar-action{width:34px;height:34px;border-radius:50%;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;flex-shrink:0}
+.topbar-action:active{background:var(--s3)}
 
 /* HOME */
-.home-header { padding: 24px 16px 16px; }
-.home-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 2px; line-height: 1; }
-.home-header h1 span { color: var(--accent); }
-.home-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.home-hero{padding:env(safe-area-inset-top,0) 14px 0;background:var(--bg);flex-shrink:0}
+.home-hero-inner{padding:20px 0 16px;border-bottom:1px solid var(--border)}
+.home-hero h1{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-0.5px}
+.home-hero h1 em{font-style:normal;color:var(--lime)}
+.home-hero p{font-size:13px;color:var(--text2);margin-top:5px}
+.stat-row{display:flex;gap:8px;margin-top:14px}
+.stat-pill{flex:1;background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px}
+.stat-pill .val{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--text)}
+.stat-pill .lbl{font-size:10px;color:var(--text2);margin-top:2px;letter-spacing:0.3px}
 
-.section-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+/* SECTION */
+.sec-hd{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.8px;margin:16px 0 8px}
 
 /* CLIENT CARD */
-.client-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: border-color 0.15s, background 0.15s; }
-.client-card:active { background: var(--surface2); border-color: var(--muted2); }
-.avatar { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; flex-shrink: 0; }
-.av-0 { background: rgba(200,241,53,0.15); color: var(--accent); }
-.av-1 { background: rgba(126,247,196,0.15); color: var(--accent2); }
-.av-2 { background: rgba(255,95,95,0.15); color: var(--red); }
-.av-3 { background: rgba(255,171,94,0.15); color: var(--orange); }
-.av-4 { background: rgba(150,150,255,0.15); color: #a0a0ff; }
-.client-info { flex: 1; min-width: 0; }
-.client-name { font-size: 15px; font-weight: 500; color: var(--text); }
-.client-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.client-today { font-size: 11px; color: var(--accent); margin-top: 4px; font-weight: 500; }
-.client-rest { font-size: 11px; color: var(--muted); margin-top: 4px; }
-.chevron { color: var(--muted2); font-size: 18px; }
-
-/* BADGE */
-.badge { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 20px; font-size: 10px; font-weight: 600; letter-spacing: 0.5px; }
-.badge-cut { background: rgba(126,247,196,0.12); color: var(--accent2); border: 1px solid rgba(126,247,196,0.25); }
-.badge-mass { background: rgba(255,171,94,0.12); color: var(--orange); border: 1px solid rgba(255,171,94,0.25); }
-.badge-tone { background: rgba(200,241,53,0.12); color: var(--accent); border: 1px solid rgba(200,241,53,0.25); }
-.badge-power { background: rgba(255,95,95,0.12); color: var(--red); border: 1px solid rgba(255,95,95,0.25); }
-
-/* ADD CLIENT BUTTON */
-.add-client-btn { width: 100%; padding: 14px; background: transparent; border: 1px dashed var(--muted2); border-radius: var(--radius); color: var(--muted); font-size: 14px; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 4px; transition: border-color 0.15s, color 0.15s; }
-.add-client-btn:active { border-color: var(--accent); color: var(--accent); }
+.cc{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:11px;transition:border-color .15s}
+.cc:active{border-color:var(--border2)}
+.ava{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;flex-shrink:0}
+.ava-0{background:var(--lime-dim);color:var(--lime)}
+.ava-1{background:var(--teal-dim);color:var(--teal)}
+.ava-2{background:var(--red-dim);color:var(--red)}
+.ava-3{background:rgba(240,168,74,.1);color:var(--orange)}
+.ava-4{background:var(--blue-dim);color:var(--blue)}
+.cc-info{flex:1;min-width:0}
+.cc-name{font-size:14px;font-weight:500}
+.cc-sub{font-size:12px;color:var(--text2);margin-top:2px}
+.cc-today{font-size:11px;font-weight:500;color:var(--lime);margin-top:3px}
+.cc-rest{font-size:11px;color:var(--text3);margin-top:3px}
+.cc-right{display:flex;align-items:center;gap:7px}
+.del-ico{width:30px;height:30px;border-radius:7px;background:var(--red-dim);border:1px solid rgba(240,90,74,.2);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer}
+.del-ico:active{background:rgba(240,90,74,.25)}
+.chev{color:var(--text3);font-size:16px}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;margin-top:4px}
+.b-cut{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(74,240,184,.2)}
+.b-mass{background:rgba(240,168,74,.1);color:var(--orange);border:1px solid rgba(240,168,74,.2)}
+.b-tone{background:var(--lime-dim);color:var(--lime);border:1px solid var(--lime-border)}
+.b-power{background:var(--red-dim);color:var(--red);border:1px solid rgba(240,90,74,.2)}
+.add-cc{width:100%;padding:13px;background:transparent;border:1px dashed var(--border2);border-radius:var(--r);color:var(--text2);font-size:13px;font-family:'Inter',sans-serif;cursor:pointer;margin-top:2px}
+.add-cc:active{border-color:var(--lime);color:var(--lime)}
 
 /* TABS */
-.tabs { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); flex-shrink: 0; }
-.tab { flex: 1; padding: 12px 8px; font-size: 13px; font-weight: 500; color: var(--muted); text-align: center; cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s; }
-.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tabs{display:flex;background:var(--s1);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:1;min-width:70px;padding:11px 6px;font-size:12px;font-weight:500;color:var(--text2);text-align:center;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s}
+.tab.active{color:var(--lime);border-bottom-color:var(--lime)}
 
-/* EXERCISE CARD */
-.ex-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
-.ex-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.ex-name { font-size: 15px; font-weight: 500; color: var(--text); }
-.ex-sets-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
-.sets-pill { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 12px; font-weight: 600; color: var(--text); font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; }
-.weight-row { display: flex; align-items: center; gap: 8px; }
-.weight-label { font-size: 12px; color: var(--muted); flex-shrink: 0; }
-.weight-inp { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 18px; font-weight: 500; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; color: var(--text); width: 90px; text-align: center; -webkit-appearance: none; }
-.weight-inp:focus { outline: none; border-color: var(--accent); }
-.weight-unit { font-size: 12px; color: var(--muted); }
-.trend-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
-.trend-up { background: rgba(200,241,53,0.12); color: var(--accent); }
-.trend-same { background: var(--surface2); color: var(--muted); }
-.trend-prev { font-size: 11px; color: var(--muted); margin-top: 8px; }
+/* TODAY */
+.day-tag{display:inline-flex;align-items:center;gap:6px;background:var(--s2);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--text2);margin-bottom:12px}
+.day-tag strong{color:var(--text);font-weight:500}
+.rest-box{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:32px 20px;text-align:center}
+.rest-box .ico{font-size:34px;margin-bottom:8px}
+.rest-box h3{font-family:'Syne',sans-serif;font-size:20px;font-weight:700}
+.rest-box p{font-size:13px;color:var(--text2);margin-top:4px}
 
-/* DAY LABEL */
-.day-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: var(--muted); margin-bottom: 14px; }
-.day-pill strong { color: var(--text); font-weight: 500; }
-.rest-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 20px; text-align: center; }
-.rest-icon { font-size: 36px; margin-bottom: 8px; }
-.rest-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: var(--text); }
-.rest-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.ex-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:13px;margin-bottom:9px}
+.ex-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.ex-name{font-size:14px;font-weight:500}
+.ex-sets-txt{font-size:12px;color:var(--text2);margin-top:2px}
+.sets-chip{background:var(--s3);border:1px solid var(--border2);border-radius:6px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;flex-shrink:0}
+.w-row{display:flex;align-items:center;gap:8px}
+.w-lbl{font-size:12px;color:var(--text2);flex-shrink:0}
+.w-inp{background:var(--s2);border:1px solid var(--border);border-radius:var(--rsm);padding:8px 10px;font-size:17px;font-weight:600;font-family:'Syne',sans-serif;color:var(--text);width:84px;text-align:center;-webkit-appearance:none}
+.w-inp:focus{outline:none;border-color:var(--lime)}
+.w-unit{font-size:12px;color:var(--text2)}
+.w-trend{margin-left:auto;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.t-up{background:var(--lime-dim);color:var(--lime)}
+.t-same{background:var(--s2);color:var(--text3)}
+.w-prev{font-size:11px;color:var(--text3);margin-top:6px}
+.save-btn{width:100%;padding:14px;background:var(--lime);color:#111;border:none;border-radius:var(--r);font-size:14px;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:.5px;cursor:pointer;margin-top:4px}
+.save-btn:active{opacity:.85}
+.save-btn.ghost{background:var(--s2);color:var(--lime);border:1px solid var(--lime-border)}
 
-/* SAVE BTN */
-.save-btn { width: 100%; padding: 15px; background: var(--accent); color: #0f0f0f; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; cursor: pointer; margin-top: 6px; transition: opacity 0.15s; }
-.save-btn:active { opacity: 0.8; }
+/* PROGRESS CHART */
+.chart-wrap{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.chart-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.chart-title{font-size:13px;font-weight:500}
+.chart-current{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--lime)}
+.chart-current span{font-size:12px;color:var(--text2);font-family:'Inter',sans-serif;font-weight:400;margin-left:3px}
+.chart-svg-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chart-svg-wrap::-webkit-scrollbar{display:none}
+.no-data{font-size:13px;color:var(--text3);text-align:center;padding:20px 0}
 
-/* PROGRAM */
-.prog-day-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
-.prog-day-header { padding: 12px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-.prog-day-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-.prog-day-dot.rest { background: var(--muted2); }
-.prog-day-info { flex: 1; }
-.prog-day-name { font-size: 14px; font-weight: 500; color: var(--text); }
-.prog-day-count { font-size: 12px; color: var(--muted); }
-.prog-arrow { color: var(--muted); font-size: 14px; transition: transform 0.2s; }
-.prog-arrow.open { transform: rotate(90deg); }
-.prog-day-body { display: none; border-top: 1px solid var(--border); padding: 4px 0; }
-.prog-ex-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 14px; border-bottom: 1px solid var(--border); }
-.prog-ex-row:last-child { border-bottom: none; }
-.prog-ex-name { font-size: 13px; color: var(--text); }
-.prog-ex-detail { font-size: 12px; color: var(--muted); text-align: right; }
+/* PROGRAM TAB */
+.prog-card{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.prog-card-hd{padding:11px 13px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.prog-dot{width:8px;height:8px;border-radius:50%;background:var(--lime);flex-shrink:0}
+.prog-dot.off{background:var(--text3)}
+.prog-card-info{flex:1}
+.prog-card-name{font-size:14px;font-weight:500}
+.prog-card-sub{font-size:12px;color:var(--text2);margin-top:1px}
+.prog-arr{color:var(--text3);font-size:14px;transition:transform .2s}
+.prog-arr.open{transform:rotate(90deg)}
+.prog-body{display:none;border-top:1px solid var(--border)}
+.prog-ex-row{display:flex;justify-content:space-between;align-items:center;padding:8px 13px;border-bottom:1px solid var(--border)}
+.prog-ex-row:last-child{border-bottom:none}
+.prog-ex-nm{font-size:13px;color:var(--text)}
+.prog-ex-dt{font-size:12px;color:var(--text2);text-align:right}
 
-/* WEIGHT BODY SECTION */
-.weight-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin-bottom: 12px; }
-.weight-hero-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
-.weight-big { font-family: 'Bebas Neue', sans-serif; font-size: 52px; line-height: 1; letter-spacing: 2px; color: var(--text); }
-.weight-big span { font-size: 20px; color: var(--muted); margin-left: 2px; }
-.weight-change { font-size: 12px; margin-top: 2px; font-weight: 500; }
-.goal-box { text-align: right; }
-.goal-label { font-size: 10px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
-.goal-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--text); margin-top: 2px; }
-.goal-sub { font-size: 11px; color: var(--muted); }
-.prog-bar-wrap { background: var(--surface2); border-radius: 20px; height: 8px; margin-bottom: 6px; overflow: hidden; }
-.prog-bar-fill { height: 8px; border-radius: 20px; background: var(--accent); transition: width 0.5s; }
-.prog-bar-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); }
-.bw-history { margin-top: 14px; }
-.bw-hist-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
-.bw-hist-row:last-child { border-bottom: none; }
-.bw-hist-date { font-size: 13px; color: var(--muted); }
-.bw-hist-val { font-size: 14px; font-weight: 500; color: var(--text); }
-.delta { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
-.delta-down { background: rgba(126,247,196,0.12); color: var(--accent2); }
-.delta-up { background: rgba(255,95,95,0.12); color: var(--red); }
-.delta-zero { background: var(--surface2); color: var(--muted); }
-.bw-add-row { display: flex; gap: 8px; margin-top: 12px; }
-.bw-input { flex: 1; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; font-size: 16px; color: var(--text); font-family: 'DM Sans', sans-serif; -webkit-appearance: none; }
-.bw-input:focus { outline: none; border-color: var(--accent); }
-.bw-add-btn { padding: 12px 18px; background: var(--accent); color: #0f0f0f; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; cursor: pointer; white-space: nowrap; }
-.bw-add-btn:active { opacity: 0.8; }
+/* BODY WEIGHT TAB */
+.bw-hero{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:10px}
+.bw-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+.bw-big{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;line-height:1;letter-spacing:-1px}
+.bw-big span{font-size:18px;color:var(--text2);font-family:'Inter',sans-serif;font-weight:400;margin-left:2px}
+.bw-delta{font-size:12px;font-weight:500;margin-top:4px}
+.bw-goal-box{text-align:right}
+.bw-goal-lbl{font-size:10px;color:var(--text2);letter-spacing:.5px}
+.bw-goal-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;margin-top:2px}
+.bw-goal-sub{font-size:10px;color:var(--text2);margin-top:2px}
+.pbar{background:var(--s3);border-radius:20px;height:7px;overflow:hidden;margin-bottom:6px}
+.pbar-fill{height:7px;border-radius:20px;background:var(--lime);transition:width .5s}
+.pbar-lbls{display:flex;justify-content:space-between;font-size:10px;color:var(--text3)}
+.bw-hist{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+.bw-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.bw-row:last-child{border-bottom:none}
+.bw-date{font-size:12px;color:var(--text2)}
+.bw-val{font-size:14px;font-weight:500}
+.delta{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px}
+.d-down{background:var(--teal-dim);color:var(--teal)}
+.d-up{background:var(--red-dim);color:var(--red)}
+.d-zero{background:var(--s3);color:var(--text3)}
+.add-row{display:flex;gap:8px;margin-top:12px}
+.add-inp{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:var(--rsm);padding:11px 12px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;-webkit-appearance:none}
+.add-inp:focus{outline:none;border-color:var(--lime)}
+.add-btn-sm{padding:11px 16px;background:var(--lime);color:#111;border:none;border-radius:var(--rsm);font-size:12px;font-weight:700;font-family:'Syne',sans-serif;cursor:pointer;white-space:nowrap}
+.add-btn-sm:active{opacity:.85}
+.subsec{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.subsec-lbl{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:8px}
+
+/* NOTES TAB */
+.notes-area{width:100%;min-height:200px;background:var(--s1);border:1px solid var(--border);border-radius:var(--r);padding:13px;font-size:14px;color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;resize:none;-webkit-appearance:none}
+.notes-area:focus{outline:none;border-color:var(--lime)}
+.notes-area::placeholder{color:var(--text3)}
+.notes-meta{font-size:11px;color:var(--text3);margin-top:6px;text-align:right}
 
 /* FORM */
-.form-group { margin-bottom: 14px; }
-.form-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; display: block; }
-.form-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 14px; font-size: 15px; color: var(--text); font-family: 'DM Sans', sans-serif; -webkit-appearance: none; transition: border-color 0.15s; }
-.form-input:focus { outline: none; border-color: var(--accent); }
-.form-select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 14px; font-size: 15px; color: var(--text); font-family: 'DM Sans', sans-serif; -webkit-appearance: none; }
-.form-select:focus { outline: none; border-color: var(--accent); }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-grp{margin-bottom:13px}
+.form-lbl{font-size:11px;font-weight:500;color:var(--text2);margin-bottom:5px;display:block;letter-spacing:.3px}
+.form-inp{width:100%;background:var(--s1);border:1px solid var(--border);border-radius:var(--rsm);padding:12px 13px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;-webkit-appearance:none;transition:border-color .15s}
+.form-inp:focus{outline:none;border-color:var(--lime)}
+.form-sel{width:100%;background:var(--s1);border:1px solid var(--border);border-radius:var(--rsm);padding:12px 13px;font-size:15px;color:var(--text);font-family:'Inter',sans-serif;-webkit-appearance:none}
+.form-sel:focus{outline:none;border-color:var(--lime)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;display:none;flex-direction:column;padding:16px;padding-bottom:env(safe-area-inset-bottom,16px)}
+.overlay.open{display:flex}
+.modal{background:var(--s1);border:1px solid var(--border);border-radius:var(--r);flex:1;display:flex;flex-direction:column;overflow:hidden}
+.modal-hd{padding:13px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.modal-ttl{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;flex:1}
+.modal-close{width:30px;height:30px;border-radius:50%;background:var(--s3);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);font-size:15px}
+.modal-close:active{background:var(--border)}
+.modal-scroll{flex:1;overflow-y:auto;padding:13px 14px;-webkit-overflow-scrolling:touch}
+.modal-scroll::-webkit-scrollbar{display:none}
+.modal-foot{padding:12px 14px;border-top:1px solid var(--border);flex-shrink:0}
+
+/* PROG EDIT */
+.pe-day{margin-bottom:16px}
+.pe-day-lbl{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:7px}
+.pe-name{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:var(--rsm);padding:9px 11px;font-size:13px;color:var(--text);font-family:'Inter',sans-serif;margin-bottom:7px}
+.pe-name:focus{outline:none;border-color:var(--lime)}
+.pe-ex{background:var(--bg);border:1px solid var(--border);border-radius:var(--rsm);padding:9px 10px;margin-bottom:6px}
+.pe-ex input{background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:7px 9px;font-size:13px;color:var(--text);font-family:'Inter',sans-serif;width:100%;margin-bottom:5px}
+.pe-ex input:focus{outline:none;border-color:var(--lime)}
+.pe-ex input:last-child{margin-bottom:0}
+.pe-row{display:flex;gap:6px;align-items:center}
+.pe-row input{flex:1;margin-bottom:0!important}
+.pe-rm{width:30px;height:30px;background:var(--red-dim);border:1px solid rgba(240,90,74,.2);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--red);font-size:14px;flex-shrink:0}
+.pe-rm:active{background:rgba(240,90,74,.25)}
+.pe-add{width:100%;padding:8px;background:transparent;border:1px dashed var(--border2);border-radius:var(--rsm);color:var(--text2);font-size:12px;font-family:'Inter',sans-serif;cursor:pointer;margin-top:3px}
+.pe-add:active{border-color:var(--lime);color:var(--lime)}
+
+/* EDIT CLIENT MODAL */
+.edit-overlay{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:600;display:none;flex-direction:column;padding:16px;padding-bottom:env(safe-area-inset-bottom,16px)}
+.edit-overlay.open{display:flex}
 
 /* TOAST */
-.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--accent); color: #0f0f0f; padding: 10px 22px; border-radius: 20px; font-size: 13px; font-weight: 700; font-family: 'Bebas Neue', sans-serif; letter-spacing: 1px; opacity: 0; transition: opacity 0.2s, transform 0.2s; pointer-events: none; white-space: nowrap; z-index: 999; }
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* PROGRAM EDIT MODAL */
-.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 500; display: none; flex-direction: column; padding: 20px 16px; }
-.modal-overlay.open { display: flex; }
-.modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-.modal-header { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 1px; flex: 1; }
-.modal-close { width: 32px; height: 32px; border-radius: 50%; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); font-size: 16px; }
-.modal-scroll { flex: 1; overflow-y: auto; padding: 14px 16px; -webkit-overflow-scrolling: touch; }
-.modal-scroll::-webkit-scrollbar { display: none; }
-.prog-edit-day { margin-bottom: 16px; }
-.prog-edit-day-title { font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 8px; letter-spacing: 0.5px; }
-.prog-edit-name { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 12px; font-size: 14px; color: var(--text); font-family: 'DM Sans', sans-serif; margin-bottom: 8px; }
-.prog-edit-name:focus { outline: none; border-color: var(--accent); }
-.prog-ex-edit-row { display: flex; flex-direction: column; gap: 6px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 6px; }
-.prog-ex-edit-row input { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; width: 100%; }
-.prog-ex-edit-row input:focus { outline: none; border-color: var(--accent); }
-.prog-ex-inline { display: flex; gap: 6px; }
-.prog-ex-inline input { flex: 1; }
-.prog-ex-remove { width: 32px; height: 32px; background: rgba(255,95,95,0.1); border: 1px solid rgba(255,95,95,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--red); font-size: 16px; flex-shrink: 0; align-self: center; }
-.add-ex-btn { width: 100%; padding: 9px; background: transparent; border: 1px dashed var(--muted2); border-radius: var(--radius-sm); color: var(--muted); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-bottom: 4px; }
-.modal-footer { padding: 12px 16px; border-top: 1px solid var(--border); flex-shrink: 0; }
-.no-workout-info { font-size: 13px; color: var(--muted); text-align: center; padding: 10px; }
+.toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0));left:50%;transform:translateX(-50%) translateY(12px);background:var(--lime);color:#111;padding:9px 20px;border-radius:20px;font-size:12px;font-weight:700;font-family:'Syne',sans-serif;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;white-space:nowrap;z-index:999;letter-spacing:.3px}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 <div id="app">
 
 <!-- HOME -->
-<div id="view-home" class="view active">
-  <div class="scroll-area">
-    <div class="home-header">
-      <h1>TRAINER<br><span>PRO</span></h1>
+<div id="v-home" class="view active">
+  <div class="home-hero">
+    <div class="home-hero-inner">
+      <h1>Trainer<br><em>Pro</em></h1>
       <p id="home-date"></p>
+      <div class="stat-row">
+        <div class="stat-pill"><div class="val" id="stat-clients">0</div><div class="lbl">клієнтів</div></div>
+        <div class="stat-pill"><div class="val" id="stat-today">0</div><div class="lbl">тренувань сьогодні</div></div>
+      </div>
     </div>
-    <div class="section-label">Клієнти</div>
+  </div>
+  <div class="scroll">
+    <div class="sec-hd">Клієнти</div>
     <div id="client-list"></div>
-    <button class="add-client-btn" onclick="openView('view-add-client')">+ Додати клієнта</button>
+    <button class="add-cc" onclick="openView('v-add')">+ Додати клієнта</button>
   </div>
 </div>
 
 <!-- CLIENT DETAIL -->
-<div id="view-client" class="view">
+<div id="v-client" class="view">
   <div class="topbar">
-    <div class="back-btn" onclick="goHome()">←</div>
-    <div class="topbar-title">
-      <h1 id="client-header-name"></h1>
-      <p id="client-header-sub"></p>
+    <div class="topbar-inner">
+      <div class="back" onclick="goHome()">←</div>
+      <div class="topbar-title">
+        <h2 id="c-hd-name"></h2>
+        <p id="c-hd-sub"></p>
+      </div>
+      <div class="topbar-action" onclick="openEditClient()" title="Редагувати">✏️</div>
     </div>
   </div>
   <div class="tabs">
     <div class="tab active" onclick="switchTab('today')">Сьогодні</div>
+    <div class="tab" onclick="switchTab('progress')">Прогрес</div>
     <div class="tab" onclick="switchTab('program')">Програма</div>
-    <div class="tab" onclick="switchTab('weight')">Вага тіла</div>
+    <div class="tab" onclick="switchTab('weight')">Вага</div>
+    <div class="tab" onclick="switchTab('notes')">Нотатки</div>
   </div>
-  <div class="scroll-area" id="tab-content"></div>
+  <div class="scroll" id="tab-content"></div>
 </div>
 
 <!-- ADD CLIENT -->
-<div id="view-add-client" class="view">
+<div id="v-add" class="view">
   <div class="topbar">
-    <div class="back-btn" onclick="goHome()">←</div>
-    <div class="topbar-title">
-      <h1>НОВИЙ КЛІЄНТ</h1>
+    <div class="topbar-inner">
+      <div class="back" onclick="goHome()">←</div>
+      <div class="topbar-title"><h2>Новий клієнт</h2></div>
     </div>
   </div>
-  <div class="scroll-area">
-    <div class="form-group">
-      <label class="form-label">Ім'я та прізвище</label>
-      <input class="form-input" id="new-name" placeholder="Наприклад: Олена Коваль" type="text">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Ціль тренувань</label>
-      <select class="form-select" id="new-goal">
+  <div class="scroll">
+    <div class="form-grp"><label class="form-lbl">Ім'я та прізвище</label><input class="form-inp" id="n-name" placeholder="Олена Коваль" type="text"></div>
+    <div class="form-grp"><label class="form-lbl">Ціль тренувань</label>
+      <select class="form-sel" id="n-goal">
         <option value="">Оберіть ціль...</option>
         <option value="cut">Схуднення</option>
         <option value="mass">Набір маси</option>
@@ -248,31 +293,38 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
       </select>
     </div>
     <div class="form-grid">
-      <div class="form-group">
-        <label class="form-label">Поточна вага (кг)</label>
-        <input class="form-input" id="new-bw" placeholder="72" type="number" step="0.1">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Цільова вага (кг)</label>
-        <input class="form-input" id="new-gw" placeholder="63" type="number" step="0.1">
-      </div>
+      <div class="form-grp"><label class="form-lbl">Поточна вага (кг)</label><input class="form-inp" id="n-bw" placeholder="72" type="number" step="0.1"></div>
+      <div class="form-grp"><label class="form-lbl">Цільова вага (кг)</label><input class="form-inp" id="n-gw" placeholder="63" type="number" step="0.1"></div>
     </div>
-    <button class="save-btn" onclick="saveNewClient()">СТВОРИТИ КЛІЄНТА</button>
+    <button class="save-btn" onclick="saveNewClient()">Створити клієнта</button>
   </div>
 </div>
 
 </div>
 
 <!-- PROGRAM EDIT MODAL -->
-<div class="modal-overlay" id="prog-modal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title">РЕДАГУВАТИ ПРОГРАМУ</div>
-      <div class="modal-close" onclick="closeProgModal()">✕</div>
+<div class="overlay" id="prog-modal">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-ttl">Програма тренувань</div>
+      <div class="modal-close" onclick="closeModal('prog-modal')">✕</div>
     </div>
-    <div class="modal-scroll" id="prog-modal-content"></div>
-    <div class="modal-footer">
-      <button class="save-btn" onclick="saveProgram()">ЗБЕРЕГТИ ПРОГРАМУ</button>
+    <div class="modal-scroll" id="prog-modal-body"></div>
+    <div class="modal-foot"><button class="save-btn" onclick="saveProgram()">Зберегти програму</button></div>
+  </div>
+</div>
+
+<!-- EDIT CLIENT MODAL -->
+<div class="edit-overlay" id="edit-modal">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-ttl">Редагувати клієнта</div>
+      <div class="modal-close" onclick="closeModal('edit-modal')">✕</div>
+    </div>
+    <div class="modal-scroll" id="edit-modal-body"></div>
+    <div class="modal-foot">
+      <button class="save-btn" onclick="saveEditClient()" style="margin-bottom:8px">Зберегти зміни</button>
+      <button class="save-btn ghost" onclick="confirmDelete()">Видалити клієнта</button>
     </div>
   </div>
 </div>
@@ -280,426 +332,522 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 <div class="toast" id="toast"></div>
 
 <script>
-const DAYS = ['Нд','Пн','Вт','Ср','Чт','Пт','Сб'];
-const DAYS_FULL = ['Неділя','Понеділок','Вівторок','Середа','Четвер','Пятниця','Субота'];
-const COLORS_COUNT = 5;
-const GOAL_LABELS = {cut:'Схуднення',mass:'Набір маси',tone:'Тонус / форма',power:'Сила / результат'};
-const GOAL_BADGE = {cut:'badge-cut',mass:'badge-mass',tone:'badge-tone',power:'badge-power'};
+const DAYS=['Нд','Пн','Вт','Ср','Чт','Пт','Сб'];
+const DAYS_FULL=['Неділя','Понеділок','Вівторок','Середа','Четвер','Пятниця','Субота'];
+const MONTHS=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+const GOAL_L={cut:'Схуднення',mass:'Набір маси',tone:'Тонус / форма',power:'Сила / результат'};
+const GOAL_B={cut:'b-cut',mass:'b-mass',tone:'b-tone',power:'b-power'};
+const CLR_N=5;
 
-function isoToday(){ return new Date().toISOString().split('T')[0]; }
-function formatDate(iso){ const[y,m,d]=iso.split('-'); return `${d}.${m}.${y}`; }
-function todayDayName(){ const d=new Date().getDay(); return DAYS[d]; }
-function todayFullLabel(){
-  const d=new Date();
-  const months=['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
-  return `${DAYS_FULL[d.getDay()].toLowerCase()}, ${d.getDate()} ${months[d.getMonth()]}`;
+let ST={};
+let cid=null;
+let ctab='today';
+
+function isoToday(){return new Date().toISOString().split('T')[0]}
+function fmtDate(iso){const[y,m,d]=iso.split('-');return`${d}.${m}.${y}`}
+function todayDay(){return DAYS[new Date().getDay()]}
+function initials(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase()}
+
+function loadST(){
+  try{const s=localStorage.getItem('tpro3');if(s)ST=JSON.parse(s)}catch(e){}
+  if(!ST.clients)ST.clients=defaults();
 }
-function initials(n){ return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase(); }
+function saveST(){try{localStorage.setItem('tpro3',JSON.stringify(ST))}catch(e){}}
 
-let STATE = {};
-let currentClientId = null;
-let currentTab = 'today';
-
-function loadState(){
-  try { const s = localStorage.getItem('trainerPro_v2'); if(s) STATE = JSON.parse(s); } catch(e){}
-  if(!STATE.clients) STATE.clients = getDefaults();
-}
-function saveState(){ try { localStorage.setItem('trainerPro_v2', JSON.stringify(STATE)); } catch(e){} }
-
-function getDefaults(){
-  return [
-    {id:1, name:'Олена Коваль', goal:'cut', colorIdx:1,
-     bodyWeight:[{date:'2026-04-01',val:72},{date:'2026-04-10',val:71.2},{date:'2026-04-20',val:70.5}],
-     goalWeight:63,
+function defaults(){
+  return[
+    {id:1,name:'Олена Коваль',goal:'cut',ci:1,
+     bw:[{d:'2026-03-01',v:72},{d:'2026-03-15',v:71.2},{d:'2026-04-01',v:70.5},{d:'2026-04-15',v:69.8}],
+     gw:63,notes:'Проблеми з коліном — обережно зі стрибковими вправами.\nВіддає перевагу ранковим тренуванням.\nАлергія на молочне.',
      program:[
-       {day:'Пн',name:'Верх тіла',exercises:[
-         {name:'Жим гантелей лежачи',sets:'4',reps:'12',lastWeight:12},
-         {name:'Тяга верхнього блоку',sets:'4',reps:'12',lastWeight:30},
-         {name:'Жим гантелей сидячи',sets:'3',reps:'15',lastWeight:8},
-         {name:'Розгинання на трицепс',sets:'3',reps:'15',lastWeight:15}
+       {day:'Пн',name:'Верх тіла',ex:[
+         {n:'Жим гантелей лежачи',s:'4',r:'12',w:12,log:[]},
+         {n:'Тяга верхнього блоку',s:'4',r:'12',w:30,log:[]},
+         {n:'Жим гантелей сидячи',s:'3',r:'15',w:8,log:[]},
+         {n:'Розгинання на трицепс',s:'3',r:'15',w:15,log:[]},
        ]},
-       {day:'Ср',name:'Низ тіла',exercises:[
-         {name:'Присідання з гантелями',sets:'4',reps:'15',lastWeight:16},
-         {name:'Румунська тяга',sets:'4',reps:'12',lastWeight:20},
-         {name:'Випади з гантелями',sets:'3',reps:'12',lastWeight:10},
-         {name:'Підйом на шкарпетки',sets:'4',reps:'20',lastWeight:0}
+       {day:'Ср',name:'Низ тіла',ex:[
+         {n:'Присідання з гантелями',s:'4',r:'15',w:16,log:[]},
+         {n:'Румунська тяга',s:'4',r:'12',w:20,log:[]},
+         {n:'Випади з гантелями',s:'3',r:'12',w:10,log:[]},
+         {n:'Підйом на шкарпетки',s:'4',r:'20',w:0,log:[]},
        ]},
-       {day:'Пт',name:'Кардіо + прес',exercises:[
-         {name:'Еліпсоїд',sets:'1',reps:'25 хв',lastWeight:0},
-         {name:'Скручування',sets:'4',reps:'20',lastWeight:0},
-         {name:'Планка',sets:'3',reps:'45 сек',lastWeight:0}
+       {day:'Пт',name:'Кардіо + прес',ex:[
+         {n:'Еліпсоїд',s:'1',r:'25 хв',w:0,log:[]},
+         {n:'Скручування',s:'4',r:'20',w:0,log:[]},
+         {n:'Планка',s:'3',r:'45 сек',w:0,log:[]},
        ]},
      ]},
-    {id:2, name:'Андрій Мельник', goal:'mass', colorIdx:3,
-     bodyWeight:[{date:'2026-04-05',val:75},{date:'2026-04-15',val:75.8},{date:'2026-04-22',val:76.5}],
-     goalWeight:85,
+    {id:2,name:'Андрій Мельник',goal:'mass',ci:3,
+     bw:[{d:'2026-03-01',v:75},{d:'2026-03-15',v:75.8},{d:'2026-04-01',v:76.5},{d:'2026-04-20',v:77.2}],
+     gw:85,notes:'Хоче акцент на грудях і спині.\nТренується 4 дні на тиждень.',
      program:[
-       {day:'Пн',name:'Груди / Трицепс',exercises:[
-         {name:'Жим штанги лежачи',sets:'5',reps:'5',lastWeight:80},
-         {name:'Нахили гантелей',sets:'4',reps:'10',lastWeight:22},
-         {name:'Французький жим',sets:'4',reps:'10',lastWeight:25}
+       {day:'Пн',name:'Груди / Трицепс',ex:[
+         {n:'Жим штанги лежачи',s:'5',r:'5',w:80,log:[{d:'2026-04-14',v:77.5},{d:'2026-04-21',v:80}]},
+         {n:'Нахили гантелей',s:'4',r:'10',w:22,log:[]},
+         {n:'Французький жим',s:'4',r:'10',w:25,log:[]},
        ]},
-       {day:'Вт',name:'Спина / Біцепс',exercises:[
-         {name:'Станова тяга',sets:'5',reps:'5',lastWeight:100},
-         {name:'Тяга штанги в нахилі',sets:'4',reps:'8',lastWeight:60},
-         {name:'Підйом штанги на біцепс',sets:'4',reps:'10',lastWeight:30}
+       {day:'Вт',name:'Спина / Біцепс',ex:[
+         {n:'Станова тяга',s:'5',r:'5',w:100,log:[{d:'2026-04-15',v:95},{d:'2026-04-22',v:100}]},
+         {n:'Тяга штанги в нахилі',s:'4',r:'8',w:60,log:[]},
+         {n:'Підйом штанги на біцепс',s:'4',r:'10',w:30,log:[]},
        ]},
-       {day:'Чт',name:'Ноги / Плечі',exercises:[
-         {name:'Присідання зі штангою',sets:'5',reps:'5',lastWeight:90},
-         {name:'Жим ногами',sets:'4',reps:'10',lastWeight:120},
-         {name:'Армійський жим',sets:'4',reps:'8',lastWeight:40}
+       {day:'Чт',name:'Ноги / Плечі',ex:[
+         {n:'Присідання зі штангою',s:'5',r:'5',w:90,log:[{d:'2026-04-17',v:85},{d:'2026-04-24',v:90}]},
+         {n:'Жим ногами',s:'4',r:'10',w:120,log:[]},
+         {n:'Армійський жим',s:'4',r:'8',w:40,log:[]},
        ]},
      ]},
   ];
 }
 
-function goHome(){ currentClientId = null; openView('view-home'); renderHome(); }
-
-function openView(id){
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+function goHome(){cid=null;openView('v-home');renderHome()}
+function openView(id){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
 
 function renderHome(){
-  document.getElementById('home-date').textContent = todayFullLabel();
-  const cl = document.getElementById('client-list'); cl.innerHTML = '';
-  (STATE.clients||[]).forEach(c => {
-    const bw = c.bodyWeight && c.bodyWeight.length ? c.bodyWeight[c.bodyWeight.length-1].val : '—';
-    const dayName = todayDayName();
-    const workout = (c.program||[]).find(p => p.day === dayName);
-    const div = document.createElement('div');
-    div.className = 'client-card';
-    div.innerHTML = `<div class="avatar av-${c.colorIdx % COLORS_COUNT}">${initials(c.name)}</div>
-      <div class="client-info">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
-          <span class="client-name">${c.name}</span>
-          <span class="badge ${GOAL_BADGE[c.goal]||''}">${GOAL_LABELS[c.goal]||c.goal}</span>
+  const d=new Date();
+  document.getElementById('home-date').textContent=`${DAYS_FULL[d.getDay()].toLowerCase()}, ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+  const cl=ST.clients||[];
+  const today=todayDay();
+  const todayCount=cl.filter(c=>(c.program||[]).some(p=>p.day===today)).length;
+  document.getElementById('stat-clients').textContent=cl.length;
+  document.getElementById('stat-today').textContent=todayCount;
+  const el=document.getElementById('client-list');el.innerHTML='';
+  cl.forEach(c=>{
+    const lastBw=c.bw&&c.bw.length?c.bw[c.bw.length-1].v:'—';
+    const w=(c.program||[]).find(p=>p.day===today);
+    const div=document.createElement('div');div.className='cc';
+    div.innerHTML=`<div class="ava ava-${c.ci%CLR_N}">${initials(c.name)}</div>
+      <div class="cc-info">
+        <div style="display:flex;align-items:center;gap:7px">
+          <span class="cc-name">${c.name}</span>
+          <span class="badge ${GOAL_B[c.goal]||''}">${GOAL_L[c.goal]||c.goal}</span>
         </div>
-        <div class="client-sub">${bw} кг</div>
-        ${workout ? `<div class="client-today">▶ ${workout.name}</div>` : `<div class="client-rest">Відпочинок</div>`}
+        <div class="cc-sub">${lastBw} кг</div>
+        ${w?`<div class="cc-today">▶ ${w.name}</div>`:`<div class="cc-rest">Відпочинок</div>`}
       </div>
-      <div class="chevron">›</div>`;
-    div.onclick = () => openClient(c.id);
-    cl.appendChild(div);
+      <div class="cc-right">
+        <div class="del-ico" data-id="${c.id}">🗑</div>
+        <div class="chev">›</div>
+      </div>`;
+    div.querySelector('.del-ico').onclick=e=>{e.stopPropagation();deleteClient(c.id)};
+    div.onclick=()=>openClient(c.id);
+    el.appendChild(div);
   });
+}
+
+function deleteClient(id){
+  const c=(ST.clients||[]).find(x=>x.id===id);
+  if(!c)return;
+  if(!confirm(`Видалити клієнта "${c.name}"?\nВсі дані будуть втрачені.`))return;
+  ST.clients=ST.clients.filter(x=>x.id!==id);
+  saveST();renderHome();toast('Клієнта видалено');
 }
 
 function openClient(id){
-  currentClientId = id;
-  const c = getClient();
-  document.getElementById('client-header-name').textContent = c.name;
-  document.getElementById('client-header-sub').textContent = GOAL_LABELS[c.goal]||'';
-  currentTab = 'today';
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===0));
-  openView('view-client');
-  renderTab();
+  cid=id;const c=gc();
+  document.getElementById('c-hd-name').textContent=c.name;
+  document.getElementById('c-hd-sub').textContent=GOAL_L[c.goal]||'';
+  ctab='today';
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));
+  openView('v-client');renderTab();
 }
-
-function getClient(){ return (STATE.clients||[]).find(c => c.id === currentClientId); }
+function gc(){return(ST.clients||[]).find(c=>c.id===cid)}
 
 function switchTab(tab){
-  currentTab = tab;
-  const tabs = ['today','program','weight'];
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
+  ctab=tab;
+  const tabs=['today','progress','program','weight','notes'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===tab));
   renderTab();
 }
-
 function renderTab(){
-  if(currentTab==='today') renderToday();
-  else if(currentTab==='program') renderProgram();
-  else renderBodyWeight();
+  if(ctab==='today')renderToday();
+  else if(ctab==='progress')renderProgress();
+  else if(ctab==='program')renderProgram();
+  else if(ctab==='weight')renderWeight();
+  else renderNotes();
 }
 
-/* --- TODAY --- */
+/* TODAY */
 function renderToday(){
-  const c = getClient();
-  const el = document.getElementById('tab-content');
-  const dayName = todayDayName();
-  const workout = (c.program||[]).find(p => p.day === dayName);
-  if(!workout){
-    el.innerHTML = `<div class="day-pill">📅 <strong>${DAYS_FULL[new Date().getDay()]}</strong></div>
-      <div class="rest-box">
-        <div class="rest-icon">😴</div>
-        <div class="rest-title">ДЕНЬ ВІДПОЧИНКУ</div>
-        <div class="rest-sub">Тренування не заплановано</div>
-      </div>`;
+  const c=gc();const el=document.getElementById('tab-content');
+  const day=todayDay();
+  const w=(c.program||[]).find(p=>p.day===day);
+  if(!w){
+    el.innerHTML=`<div class="day-tag">📅 <strong>${DAYS_FULL[new Date().getDay()]}</strong></div>
+      <div class="rest-box"><div class="ico">😴</div><h3>День відпочинку</h3><p>Тренування не заплановано</p></div>`;
     return;
   }
-  let html = `<div class="day-pill">📅 <strong>${dayName} — ${workout.name}</strong></div>`;
-  workout.exercises.forEach((ex, ei) => {
-    const wKey = `wlog_${c.id}_${dayName}_${ei}`;
-    const stored = STATE[wKey]||{};
-    const val = stored.weight !== undefined ? stored.weight : (ex.lastWeight||0);
-    const prev = ex.lastWeight||0;
-    const diff = +(val - prev).toFixed(1);
-    const noWeight = !ex.lastWeight && ex.lastWeight !== 0 && val === 0;
-    const isCardio = ex.reps && (ex.reps.includes('хв') || ex.reps.includes('сек') || ex.reps.includes('с'));
-    const setsLabel = isCardio ? `${ex.sets}×${ex.reps}` : `${ex.sets} підходи × ${ex.reps} повт`;
-    let trendHtml = '';
-    if(!isCardio && prev > 0){
-      if(diff > 0) trendHtml = `<span class="trend-badge trend-up">+${diff} кг</span>`;
-      else if(diff === 0) trendHtml = `<span class="trend-badge trend-same">= без змін</span>`;
+  let html=`<div class="day-tag">📅 <strong>${day} — ${w.name}</strong></div>`;
+  w.ex.forEach((ex,ei)=>{
+    const isCardio=ex.r&&(ex.r.includes('хв')||ex.r.includes('сек'));
+    const sLabel=isCardio?`${ex.s}×${ex.r}`:`${ex.s} підходи × ${ex.r} повт`;
+    const prev=ex.w||0;
+    const lastLog=ex.log&&ex.log.length?ex.log[ex.log.length-1].v:prev;
+    let trend='';
+    if(!isCardio&&prev>0){
+      const d=+(lastLog-prev).toFixed(1);
+      if(d>0)trend=`<span class="w-trend t-up">+${d} кг</span>`;
+      else trend=`<span class="w-trend t-same">= без змін</span>`;
     }
-    html += `<div class="ex-card">
-      <div class="ex-card-header">
-        <div><div class="ex-name">${ex.name}</div><div class="ex-sets-label">${setsLabel}</div></div>
-        <div class="sets-pill">${ex.sets}×${ex.reps}</div>
+    html+=`<div class="ex-card">
+      <div class="ex-top">
+        <div><div class="ex-name">${ex.n}</div><div class="ex-sets-txt">${sLabel}</div></div>
+        <div class="sets-chip">${ex.s}×${ex.r}</div>
       </div>
-      ${!isCardio ? `<div class="weight-row">
-        <span class="weight-label">Вага:</span>
-        <input class="weight-inp" type="number" id="w_${ei}" value="${val}" step="2.5" min="0">
-        <span class="weight-unit">кг</span>
-        ${trendHtml}
+      ${!isCardio?`<div class="w-row">
+        <span class="w-lbl">Вага:</span>
+        <input class="w-inp" type="number" id="wi_${ei}" value="${lastLog}" step="2.5" min="0">
+        <span class="w-unit">кг</span>${trend}
       </div>
-      ${prev > 0 ? `<div class="trend-prev">Минулого разу: ${prev} кг</div>` : ''}` : ''}
+      ${prev>0?`<div class="w-prev">Попереднє: ${prev} кг</div>`:''}`:``}
     </div>`;
   });
-  html += `<button class="save-btn" onclick="saveWorkout()">ЗБЕРЕГТИ ТРЕНУВАННЯ</button>`;
-  el.innerHTML = html;
+  html+=`<button class="save-btn" onclick="saveWorkout()">Зберегти тренування</button>`;
+  el.innerHTML=html;
 }
 
 function saveWorkout(){
-  const c = getClient();
-  const dayName = todayDayName();
-  const workout = (c.program||[]).find(p => p.day === dayName);
-  if(!workout) return;
-  workout.exercises.forEach((ex, ei) => {
-    const inp = document.getElementById('w_' + ei);
+  const c=gc();const day=todayDay();
+  const w=(c.program||[]).find(p=>p.day===day);if(!w)return;
+  const today=isoToday();
+  w.ex.forEach((ex,ei)=>{
+    const inp=document.getElementById('wi_'+ei);
     if(inp){
-      const v = parseFloat(inp.value)||0;
-      ex.lastWeight = v;
-      STATE[`wlog_${c.id}_${dayName}_${ei}`] = {weight: v, date: isoToday()};
+      const v=parseFloat(inp.value)||0;
+      if(!ex.log)ex.log=[];
+      const last=ex.log.length?ex.log[ex.log.length-1]:null;
+      if(!last||last.d!==today)ex.log.push({d:today,v});
+      else last.v=v;
+      ex.w=v;
     }
   });
-  saveState(); showToast('ЗБЕРЕЖЕНО ✓');
+  saveST();toast('Тренування збережено ✓');
 }
 
-/* --- PROGRAM --- */
-function renderProgram(){
-  const c = getClient();
-  const el = document.getElementById('tab-content');
-  const allDays = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
-  let html = '';
-  allDays.forEach((day, di) => {
-    const workout = (c.program||[]).find(p => p.day === day);
-    html += `<div class="prog-day-card">
-      <div class="prog-day-header" onclick="toggleProgDay(${di})">
-        <div class="prog-day-dot${workout ? '' : ' rest'}"></div>
-        <div class="prog-day-info">
-          <div class="prog-day-name">${day} ${workout ? '— ' + workout.name : '— Відпочинок'}</div>
-          <div class="prog-day-count">${workout ? workout.exercises.length + ' вправ' : ''}</div>
-        </div>
-        <div class="prog-arrow" id="parr-${di}">›</div>
-      </div>
-      <div class="prog-day-body" id="pbody-${di}">`;
-    if(workout){
-      workout.exercises.forEach(ex => {
-        const isCardio = ex.reps && (ex.reps.includes('хв') || ex.reps.includes('сек'));
-        html += `<div class="prog-ex-row">
-          <span class="prog-ex-name">${ex.name}</span>
-          <span class="prog-ex-detail">${ex.sets}×${ex.reps}${!isCardio && ex.lastWeight ? ' · ' + ex.lastWeight + ' кг' : ''}</span>
-        </div>`;
-      });
-    }
-    html += `</div></div>`;
-  });
-  html += `<button class="save-btn" style="margin-top:6px;background:var(--surface2);color:var(--accent);border:1px solid var(--accent)" onclick="openProgModal()">✏️ РЕДАГУВАТИ ПРОГРАМУ</button>`;
-  el.innerHTML = html;
-}
-
-function toggleProgDay(di){
-  const body = document.getElementById('pbody-' + di);
-  const arr = document.getElementById('parr-' + di);
-  const open = body.style.display === 'block';
-  body.style.display = open ? 'none' : 'block';
-  arr.textContent = open ? '›' : '˅';
-  arr.classList.toggle('open', !open);
-}
-
-/* --- PROGRAM MODAL --- */
-function openProgModal(){
-  const c = getClient();
-  const allDays = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
-  let html = '';
-  allDays.forEach((day, di) => {
-    const workout = (c.program||[]).find(p => p.day === day);
-    const exList = workout ? workout.exercises : [];
-    html += `<div class="prog-edit-day">
-      <div class="prog-edit-day-title">${day}</div>
-      <input class="prog-edit-name" id="pday-name-${di}" placeholder="Назва (або пусто = відпочинок)" value="${workout ? workout.name : ''}">
-      <div id="pday-exlist-${di}">`;
-    exList.forEach((ex, ei) => {
-      html += exEditRow(di, ei, ex.name, ex.sets, ex.reps, ex.lastWeight);
+/* PROGRESS */
+function renderProgress(){
+  const c=gc();const el=document.getElementById('tab-content');
+  const allEx=[];
+  (c.program||[]).forEach(day=>{
+    (day.ex||[]).forEach(ex=>{
+      const isCardio=ex.r&&(ex.r.includes('хв')||ex.r.includes('сек'));
+      if(!isCardio&&(ex.log&&ex.log.length>0||ex.w>0)){
+        allEx.push({name:ex.n,log:ex.log||[],current:ex.w||0,sets:ex.s,reps:ex.r});
+      }
     });
-    html += `</div>
-      <button class="add-ex-btn" onclick="addExRow(${di})">+ Додати вправу</button>
+  });
+  if(!allEx.length){
+    el.innerHTML=`<div class="rest-box"><div class="ico">📊</div><h3>Немає даних</h3><p>Запишіть хоча б одне тренування щоб побачити прогрес</p></div>`;
+    return;
+  }
+  let html='';
+  allEx.forEach(ex=>{
+    const points=ex.log.length?ex.log:[{d:isoToday(),v:ex.current}];
+    const vals=points.map(p=>p.v);
+    const mn=Math.min(...vals);const mx=Math.max(...vals);
+    const first=vals[0];const last=vals[vals.length-1];
+    const diff=+(last-first).toFixed(1);
+    const W=Math.max(points.length*52,240);const H=80;const pad=12;
+    const range=mx-mn||1;
+    const pts=points.map((p,i)=>{
+      const x=pad+(i/(Math.max(points.length-1,1)))*(W-pad*2);
+      const y=H-pad-(p.v-mn)/range*(H-pad*2);
+      return{x,y,d:p.d,v:p.v};
+    });
+    const pathD=pts.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+    const fillD=pathD+` L${pts[pts.length-1].x.toFixed(1)},${H} L${pts[0].x.toFixed(1)},${H} Z`;
+    const dots=pts.map(p=>`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="#b8f04a"/>`).join('');
+    const labels=pts.map(p=>`<text x="${p.x.toFixed(1)}" y="${H-1}" text-anchor="middle" font-size="8" fill="#5a5b63">${fmtDate(p.d).slice(0,5)}</text>`).join('');
+    const topLabels=pts.map(p=>`<text x="${p.x.toFixed(1)}" y="${(p.y-6).toFixed(1)}" text-anchor="middle" font-size="8.5" fill="#b8f04a" font-weight="600">${p.v}</text>`).join('');
+    html+=`<div class="chart-wrap">
+      <div class="chart-hd">
+        <div>
+          <div class="chart-title">${ex.name}</div>
+          <div style="font-size:11px;color:var(--text2);margin-top:2px">${ex.sets}×${ex.reps} · ${points.length} записів</div>
+        </div>
+        <div>
+          <div class="chart-current">${last}<span>кг</span></div>
+          <div style="font-size:11px;text-align:right;margin-top:2px;color:${diff>=0?'var(--lime)':'var(--red)'}">${diff>=0?'+':''}${diff} кг</div>
+        </div>
+      </div>
+      <div class="chart-svg-wrap">
+        <svg width="${W}" height="${H+10}" viewBox="0 0 ${W} ${H+10}" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="g${ex.name.length}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b8f04a" stop-opacity=".25"/>
+            <stop offset="100%" stop-color="#b8f04a" stop-opacity="0"/>
+          </linearGradient></defs>
+          <path d="${fillD}" fill="url(#g${ex.name.length})"/>
+          <path d="${pathD}" fill="none" stroke="#b8f04a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          ${dots}${topLabels}${labels}
+        </svg>
+      </div>
     </div>`;
   });
-  document.getElementById('prog-modal-content').innerHTML = html;
+  el.innerHTML=html;
+}
+
+/* PROGRAM */
+function renderProgram(){
+  const c=gc();const el=document.getElementById('tab-content');
+  const allDays=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  let html='';
+  allDays.forEach((day,di)=>{
+    const w=(c.program||[]).find(p=>p.day===day);
+    html+=`<div class="prog-card">
+      <div class="prog-card-hd" onclick="togglePDay(${di})">
+        <div class="prog-dot${w?'':' off'}"></div>
+        <div class="prog-card-info">
+          <div class="prog-card-name">${day}${w?' — '+w.name:' — Відпочинок'}</div>
+          <div class="prog-card-sub">${w?w.ex.length+' вправ':''}</div>
+        </div>
+        <div class="prog-arr" id="pa-${di}">›</div>
+      </div>
+      <div class="prog-body" id="pb-${di}">`;
+    if(w)w.ex.forEach(ex=>{
+      const isC=ex.r&&(ex.r.includes('хв')||ex.r.includes('сек'));
+      html+=`<div class="prog-ex-row">
+        <span class="prog-ex-nm">${ex.n}</span>
+        <span class="prog-ex-dt">${ex.s}×${ex.r}${!isC&&ex.w?' · '+ex.w+' кг':''}</span>
+      </div>`;
+    });
+    html+=`</div></div>`;
+  });
+  html+=`<button class="save-btn ghost" style="margin-top:6px" onclick="openProgModal()">✏️ Редагувати програму</button>`;
+  el.innerHTML=html;
+}
+
+function togglePDay(di){
+  const b=document.getElementById('pb-'+di);
+  const a=document.getElementById('pa-'+di);
+  const open=b.style.display==='block';
+  b.style.display=open?'none':'block';
+  a.classList.toggle('open',!open);
+  a.textContent=open?'›':'˅';
+}
+
+/* PROG MODAL */
+let exCnt={};
+function openProgModal(){
+  const c=gc();
+  const allDays=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  let html='';
+  allDays.forEach((day,di)=>{
+    const w=(c.program||[]).find(p=>p.day===day);
+    const exList=w?w.ex:[];
+    html+=`<div class="pe-day">
+      <div class="pe-day-lbl">${day}</div>
+      <input class="pe-name" id="pdn-${di}" placeholder="Назва (пусто = відпочинок)" value="${w?w.name:''}">
+      <div id="pex-${di}">`;
+    exList.forEach((ex,ei)=>{html+=peRow(di,ei,ex.n,ex.s,ex.r,ex.w)});
+    html+=`</div><button class="pe-add" onclick="addPeRow(${di})">+ Додати вправу</button></div>`;
+  });
+  document.getElementById('prog-modal-body').innerHTML=html;
   document.getElementById('prog-modal').classList.add('open');
 }
 
-function exEditRow(di, ei, name='', sets='3', reps='10', weight=0){
-  return `<div class="prog-ex-edit-row" id="exrow-${di}-${ei}">
-    <input placeholder="Назва вправи" value="${name}" id="exname-${di}-${ei}">
-    <div class="prog-ex-inline">
-      <input placeholder="Підходи" value="${sets}" id="exsets-${di}-${ei}" type="number" min="1">
-      <input placeholder="Повторення / час" value="${reps}" id="exreps-${di}-${ei}">
-      <input placeholder="Вага кг" value="${weight||''}" id="exwt-${di}-${ei}" type="number" min="0">
-      <div class="prog-ex-remove" onclick="removeExRow(${di},${ei})">✕</div>
+function peRow(di,ei,n='',s='3',r='10',w=0){
+  return`<div class="pe-ex" id="per-${di}-${ei}">
+    <input placeholder="Назва вправи" value="${n}" id="pen-${di}-${ei}">
+    <div class="pe-row">
+      <input placeholder="Підходи" value="${s}" id="pes-${di}-${ei}" type="number" min="1" style="max-width:80px">
+      <input placeholder="Повт / час" value="${r}" id="per2-${di}-${ei}">
+      <input placeholder="Вага кг" value="${w||''}" id="pew-${di}-${ei}" type="number" min="0" style="max-width:80px">
+      <div class="pe-rm" onclick="document.getElementById('per-${di}-${ei}').remove()">✕</div>
     </div>
   </div>`;
 }
 
-let exCounters = {};
-function addExRow(di){
-  const list = document.getElementById('pday-exlist-' + di);
-  if(!exCounters[di]) exCounters[di] = list.children.length;
-  exCounters[di]++;
-  const ei = 'new_' + di + '_' + exCounters[di];
-  const div = document.createElement('div');
-  div.innerHTML = exEditRow(di, ei);
-  list.appendChild(div.firstElementChild);
-}
-
-function removeExRow(di, ei){
-  const row = document.getElementById('exrow-' + di + '-' + ei);
-  if(row) row.remove();
+function addPeRow(di){
+  if(!exCnt[di])exCnt[di]=100;exCnt[di]++;
+  const ei='x'+exCnt[di];
+  const d=document.createElement('div');
+  d.innerHTML=peRow(di,ei);
+  document.getElementById('pex-'+di).appendChild(d.firstElementChild);
 }
 
 function saveProgram(){
-  const c = getClient();
-  const allDays = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
-  c.program = [];
-  allDays.forEach((day, di) => {
-    const name = document.getElementById('pday-name-' + di).value.trim();
-    if(!name) return;
-    const list = document.getElementById('pday-exlist-' + di);
-    const rows = list.querySelectorAll('.prog-ex-edit-row');
-    const exercises = [];
-    rows.forEach(row => {
-      const id = row.id.replace('exrow-','');
-      const [d, ...rest] = id.split('-'); const ei = rest.join('-');
-      const n = document.getElementById('exname-' + d + '-' + ei);
-      const s = document.getElementById('exsets-' + d + '-' + ei);
-      const r = document.getElementById('exreps-' + d + '-' + ei);
-      const w = document.getElementById('exwt-' + d + '-' + ei);
-      if(n && n.value.trim()){
-        exercises.push({name:n.value.trim(), sets:s?s.value:'3', reps:r?r.value:'10', lastWeight:w?parseFloat(w.value)||0:0});
+  const c=gc();
+  const allDays=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+  c.program=[];
+  allDays.forEach((day,di)=>{
+    const name=document.getElementById('pdn-'+di).value.trim();
+    if(!name)return;
+    const rows=document.getElementById('pex-'+di).querySelectorAll('.pe-ex');
+    const exs=[];
+    rows.forEach(row=>{
+      const id=row.id.replace('per-','');
+      const[d,...rest]=id.split('-');const ei=rest.join('-');
+      const nn=document.getElementById('pen-'+d+'-'+ei);
+      const ns=document.getElementById('pes-'+d+'-'+ei);
+      const nr=document.getElementById('per2-'+d+'-'+ei);
+      const nw=document.getElementById('pew-'+d+'-'+ei);
+      if(nn&&nn.value.trim()){
+        exs.push({n:nn.value.trim(),s:ns?ns.value:'3',r:nr?nr.value:'10',w:nw?parseFloat(nw.value)||0:0,log:[]});
       }
     });
-    c.program.push({day, name, exercises});
+    c.program.push({day,name,ex:exs});
   });
-  saveState();
-  exCounters = {};
-  closeProgModal();
-  renderProgram();
-  showToast('ПРОГРАМУ ЗБЕРЕЖЕНО ✓');
+  exCnt={};saveST();closeModal('prog-modal');renderProgram();toast('Програму збережено ✓');
 }
 
-function closeProgModal(){
-  document.getElementById('prog-modal').classList.remove('open');
-}
-
-/* --- BODY WEIGHT --- */
-function renderBodyWeight(){
-  const c = getClient();
-  const el = document.getElementById('tab-content');
-  const bw = c.bodyWeight||[];
-  const current = bw.length ? bw[bw.length-1].val : 0;
-  const start = bw.length ? bw[0].val : current;
-  const goal = c.goalWeight||0;
-  const isCut = c.goal === 'cut';
-  let progress = 0;
-  if(isCut && start > goal) progress = Math.min(100, Math.round((start-current)/(start-goal)*100));
-  else if(!isCut && start < goal) progress = Math.min(100, Math.round((current-start)/(goal-start)*100));
-  const diff = +(current - start).toFixed(1);
-  const histRows = [...bw].reverse().slice(0,8).map((row, i, arr) => {
-    const prev = arr[i+1];
-    const delta = prev ? +(row.val - prev.val).toFixed(1) : null;
-    let dHtml = '';
-    if(delta !== null){
-      const isBetter = isCut ? delta < 0 : delta > 0;
-      if(delta < 0) dHtml = `<span class="delta ${isBetter?'delta-down':'delta-up'}">${delta} кг</span>`;
-      else if(delta > 0) dHtml = `<span class="delta ${isBetter?'delta-down':'delta-up'}">+${delta} кг</span>`;
-      else dHtml = `<span class="delta delta-zero">= 0</span>`;
+/* WEIGHT */
+function renderWeight(){
+  const c=gc();const el=document.getElementById('tab-content');
+  const bw=c.bw||[];
+  const cur=bw.length?bw[bw.length-1].v:0;
+  const start=bw.length?bw[0].v:cur;
+  const goal=c.gw||0;
+  const isCut=c.goal==='cut';
+  let pct=0;
+  if(isCut&&start>goal)pct=Math.min(100,Math.round((start-cur)/(start-goal)*100));
+  else if(!isCut&&start<goal)pct=Math.min(100,Math.round((cur-start)/(goal-start)*100));
+  const diff=+(cur-start).toFixed(1);
+  const good=isCut?diff<=0:diff>=0;
+  const hist=[...bw].reverse().slice(0,10).map((row,i,arr)=>{
+    const prev=arr[i+1];
+    const delta=prev?+(row.v-prev.v).toFixed(1):null;
+    const better=isCut?delta<0:delta>0;
+    let dh='';
+    if(delta!==null){
+      if(delta<0)dh=`<span class="delta ${better?'d-down':'d-up'}">${delta} кг</span>`;
+      else if(delta>0)dh=`<span class="delta ${better?'d-down':'d-up'}">+${delta} кг</span>`;
+      else dh=`<span class="delta d-zero">= 0</span>`;
     }
-    return `<div class="bw-hist-row"><span class="bw-hist-date">${formatDate(row.date)}</span><span class="bw-hist-val">${row.val} кг</span>${dHtml}</div>`;
+    return`<div class="bw-row"><span class="bw-date">${fmtDate(row.d)}</span><span class="bw-val">${row.v} кг</span>${dh}</div>`;
   }).join('');
 
-  const changeColor = isCut ? (diff <= 0 ? 'var(--accent2)' : 'var(--red)') : (diff >= 0 ? 'var(--accent2)' : 'var(--red)');
-
-  el.innerHTML = `<div class="weight-hero">
-    <div class="weight-hero-top">
+  el.innerHTML=`<div class="bw-hero">
+    <div class="bw-top">
       <div>
-        <div class="weight-big">${current}<span>кг</span></div>
-        <div class="weight-change" style="color:${changeColor}">${diff > 0 ? '+' : ''}${diff} кг від старту</div>
+        <div class="bw-big">${cur}<span>кг</span></div>
+        <div class="bw-delta" style="color:${good?'var(--teal)':'var(--red)'}">${diff>0?'+':''}${diff} кг від старту</div>
       </div>
-      <div class="goal-box">
-        <div class="goal-label">Ціль</div>
-        <div class="goal-val">${goal}<span style="font-size:14px;color:var(--muted)">кг</span></div>
-        <div class="goal-sub">${GOAL_LABELS[c.goal]||''}</div>
+      <div class="bw-goal-box">
+        <div class="bw-goal-lbl">Ціль</div>
+        <div class="bw-goal-val">${goal}<span style="font-size:14px;color:var(--text2);font-family:Inter;font-weight:400"> кг</span></div>
+        <div class="bw-goal-sub">${GOAL_L[c.goal]||''}</div>
       </div>
     </div>
-    <div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${progress}%"></div></div>
-    <div class="prog-bar-labels">
-      <span>Старт: ${start} кг</span>
-      <span>${progress}%</span>
-      <span>Ціль: ${goal} кг</span>
+    <div class="pbar"><div class="pbar-fill" style="width:${pct}%"></div></div>
+    <div class="pbar-lbls"><span>Старт: ${start} кг</span><span>${pct}%</span><span>Ціль: ${goal} кг</span></div>
+    ${bw.length?`<div class="bw-hist">${hist}</div>`:''}
+    <div class="add-row">
+      <input class="add-inp" id="bw-inp" type="number" placeholder="Нова вага (кг)" step="0.1" min="30">
+      <button class="add-btn-sm" onclick="addBW()">Додати</button>
     </div>
-    ${bw.length > 0 ? `<div class="bw-history">${histRows}</div>` : ''}
-    <div class="bw-add-row">
-      <input class="bw-input" id="bw-new-val" type="number" placeholder="Нова вага (кг)" step="0.1" min="30">
-      <button class="bw-add-btn" onclick="addBodyWeight()">ДОДАТИ</button>
+    <div class="subsec">
+      <div class="subsec-lbl">Змінити цільову вагу</div>
+      <div class="add-row">
+        <input class="add-inp" id="gw-inp" type="number" placeholder="Нова ціль (кг)" step="0.1" value="${goal||''}">
+        <button class="add-btn-sm" onclick="saveGW()">Зберегти</button>
+      </div>
     </div>
   </div>`;
 }
 
-function addBodyWeight(){
-  const inp = document.getElementById('bw-new-val');
-  const val = parseFloat(inp.value);
-  if(!val || val < 30 || val > 300){ showToast('Введіть правильну вагу'); return; }
-  const c = getClient();
-  if(!c.bodyWeight) c.bodyWeight = [];
-  c.bodyWeight.push({date: isoToday(), val: +val.toFixed(1)});
-  saveState(); inp.value = ''; renderBodyWeight(); showToast('ВАГУ ЗАПИСАНО ✓');
+function addBW(){
+  const inp=document.getElementById('bw-inp');
+  const v=parseFloat(inp.value);
+  if(!v||v<30||v>300){toast('Введіть правильну вагу');return}
+  const c=gc();if(!c.bw)c.bw=[];
+  c.bw.push({d:isoToday(),v:+v.toFixed(1)});
+  saveST();inp.value='';renderWeight();toast('Вагу записано ✓');
 }
 
-/* --- ADD CLIENT --- */
+function saveGW(){
+  const inp=document.getElementById('gw-inp');
+  const v=parseFloat(inp.value);
+  if(!v||v<30||v>300){toast('Введіть правильну вагу');return}
+  const c=gc();c.gw=+v.toFixed(1);
+  saveST();renderWeight();toast('Ціль оновлено ✓');
+}
+
+/* NOTES */
+function renderNotes(){
+  const c=gc();const el=document.getElementById('tab-content');
+  el.innerHTML=`<div style="font-size:13px;color:var(--text2);margin-bottom:10px">Нотатки по клієнту — особливості, травми, побажання, тощо.</div>
+    <textarea class="notes-area" id="notes-ta" placeholder="Введіть нотатки...">${c.notes||''}</textarea>
+    <div class="notes-meta" id="notes-meta">${(c.notes||'').length} символів</div>
+    <button class="save-btn" style="margin-top:10px" onclick="saveNotes()">Зберегти нотатки</button>`;
+  document.getElementById('notes-ta').addEventListener('input',function(){
+    document.getElementById('notes-meta').textContent=this.value.length+' символів';
+  });
+}
+
+function saveNotes(){
+  const ta=document.getElementById('notes-ta');
+  const c=gc();c.notes=ta.value;
+  saveST();toast('Нотатки збережено ✓');
+}
+
+/* EDIT CLIENT */
+function openEditClient(){
+  const c=gc();
+  document.getElementById('edit-modal-body').innerHTML=`
+    <div class="form-grp"><label class="form-lbl">Ім'я та прізвище</label><input class="form-inp" id="ec-name" value="${c.name}" type="text"></div>
+    <div class="form-grp"><label class="form-lbl">Ціль тренувань</label>
+      <select class="form-sel" id="ec-goal">
+        <option value="cut"${c.goal==='cut'?' selected':''}>Схуднення</option>
+        <option value="mass"${c.goal==='mass'?' selected':''}>Набір маси</option>
+        <option value="tone"${c.goal==='tone'?' selected':''}>Тонус / форма</option>
+        <option value="power"${c.goal==='power'?' selected':''}>Сила / результат</option>
+      </select>
+    </div>
+    <div class="form-grid">
+      <div class="form-grp"><label class="form-lbl">Цільова вага (кг)</label><input class="form-inp" id="ec-gw" value="${c.gw||''}" type="number" step="0.1"></div>
+    </div>`;
+  document.getElementById('edit-modal').classList.add('open');
+}
+
+function saveEditClient(){
+  const c=gc();
+  const name=document.getElementById('ec-name').value.trim();
+  const goal=document.getElementById('ec-goal').value;
+  const gw=parseFloat(document.getElementById('ec-gw').value);
+  if(!name){toast('Введіть імя');return}
+  c.name=name;c.goal=goal;if(gw)c.gw=gw;
+  saveST();closeModal('edit-modal');
+  document.getElementById('c-hd-name').textContent=c.name;
+  document.getElementById('c-hd-sub').textContent=GOAL_L[c.goal]||'';
+  toast('Зміни збережено ✓');
+}
+
+function confirmDelete(){
+  const c=gc();
+  closeModal('edit-modal');
+  if(!confirm(`Видалити клієнта "${c.name}"?\nВсі дані будуть втрачені.`))return;
+  ST.clients=ST.clients.filter(x=>x.id!==cid);
+  saveST();goHome();toast('Клієнта видалено');
+}
+
+/* ADD CLIENT */
 function saveNewClient(){
-  const name = document.getElementById('new-name').value.trim();
-  const goal = document.getElementById('new-goal').value;
-  const bw = parseFloat(document.getElementById('new-bw').value);
-  const gw = parseFloat(document.getElementById('new-gw').value);
-  if(!name){ showToast('ВВЕДІТЬ ІМЯ'); return; }
-  if(!goal){ showToast('ОБЕРІТЬ ЦІЛЬ'); return; }
-  const id = Date.now();
-  const colorIdx = (STATE.clients||[]).length % COLORS_COUNT;
-  const client = {
-    id, name, goal, colorIdx,
-    bodyWeight: bw ? [{date: isoToday(), val: +bw.toFixed(1)}] : [],
-    goalWeight: gw||0,
-    program: []
-  };
-  if(!STATE.clients) STATE.clients = [];
-  STATE.clients.push(client);
-  saveState();
-  document.getElementById('new-name').value = '';
-  document.getElementById('new-goal').value = '';
-  document.getElementById('new-bw').value = '';
-  document.getElementById('new-gw').value = '';
-  goHome();
-  showToast(`${name.split(' ')[0].toUpperCase()} ДОДАНО ✓`);
+  const name=document.getElementById('n-name').value.trim();
+  const goal=document.getElementById('n-goal').value;
+  const bw=parseFloat(document.getElementById('n-bw').value);
+  const gw=parseFloat(document.getElementById('n-gw').value);
+  if(!name){toast('Введіть імя');return}
+  if(!goal){toast('Оберіть ціль');return}
+  const id=Date.now();
+  const ci=(ST.clients||[]).length%CLR_N;
+  const client={id,name,goal,ci,bw:bw?[{d:isoToday(),v:+bw.toFixed(1)}]:[],gw:gw||0,notes:'',program:[]};
+  if(!ST.clients)ST.clients=[];
+  ST.clients.push(client);
+  saveST();
+  ['n-name','n-bw','n-gw'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('n-goal').value='';
+  goHome();toast(`${name.split(' ')[0]} додано ✓`);
 }
 
-/* --- TOAST --- */
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
+/* TOAST */
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
 }
 
-loadState(); renderHome();
+loadST();renderHome();
 </script>
 </body>
 </html>
